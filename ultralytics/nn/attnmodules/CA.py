@@ -1,9 +1,10 @@
-import torch.nn as nn
 import torch
+import torch.nn as nn
+
 
 class CA(nn.Module):
-    def __init__(self, channels:int, reduction:int=32):
-        super(CA, self).__init__()
+    def __init__(self, channels: int, reduction: int = 32):
+        super().__init__()
         assert channels > 0
         mip = max(8, channels // reduction)
 
@@ -17,7 +18,7 @@ class CA(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        b, c, h, w = x.shape
+        _b, _c, h, w = x.shape
         x_h = x.mean(dim=3, keepdim=True)
         x_w = x.mean(dim=2, keepdim=True)
         x_w_t = x_w.permute(0, 1, 3, 2)
@@ -33,6 +34,7 @@ class CA(nn.Module):
 
         out = x * a_h * a_w
         return out
+
 
 # if __name__ == '__main__':
 #     x = torch.randn(5, 30, 220, 220)
