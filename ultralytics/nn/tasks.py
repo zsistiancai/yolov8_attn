@@ -1,5 +1,5 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
-
+from .attnmodules import *
 import contextlib
 import pickle
 import re
@@ -1839,6 +1839,7 @@ def parse_model(d, ch, verbose=True):
             A2C2f,
         }
     )
+    attn_modules = frozenset({ECA, CA, SimAM, CBAM})
     for i, (f, n, m, args) in enumerate(d["backbone"] + d["head"]):  # from, number, module, args
         m = (
             getattr(torch.nn, m[3:])
@@ -1891,6 +1892,9 @@ def parse_model(d, ch, verbose=True):
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
+        elif m in attn_modules:
+            c2 = ch[f] if isinstance(f, int) else ch[f[-1]]
+            args = [c2, *args]
         elif m in frozenset(
             {
                 Detect,
