@@ -1,5 +1,4 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
-from .attnmodules import *
 import contextlib
 import pickle
 import re
@@ -99,6 +98,8 @@ from ultralytics.utils.torch_utils import (
     smart_inference_mode,
     time_sync,
 )
+
+from .attnmodules import *
 
 
 class BaseModel(torch.nn.Module):
