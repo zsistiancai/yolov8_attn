@@ -39,7 +39,6 @@ names:
   17: sofa
   18: train
   19: tvmonitor
-
 # Download script/URL (optional) ---------------------------------------------------------------------------------------
 #download: |
 #  import xml.etree.ElementTree as ET
