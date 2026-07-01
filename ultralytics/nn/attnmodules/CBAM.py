@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
 
+
 class CBAM(nn.Module):
     def __init__(self, channels, reduction=16, kernel_size=7):
-        super(CBAM, self).__init__()
+        super().__init__()
         assert channels > 0
         hidden = channels // reduction
 
@@ -34,6 +35,7 @@ class CBAM(nn.Module):
         out = x_c * Ms
 
         return out
+
 
 # if __name__ == '__main__':
 #     x = torch.randn(10, 256, 200, 200)
