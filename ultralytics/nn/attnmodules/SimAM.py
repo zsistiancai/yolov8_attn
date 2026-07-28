@@ -1,9 +1,9 @@
-import torch.nn as nn
-import torch
+from torch import nn
+
 
 class SimAM(nn.Module):
-    def __init__(self, channels:int, e_lambda:float=1e-4):
-        super(SimAM, self).__init__()
+    def __init__(self, channels: int, e_lambda: float = 1e-4):
+        super().__init__()
         # self.channels = channels
         self.e_lambda = e_lambda
         self.sigmoid = nn.Sigmoid()
@@ -17,6 +17,7 @@ class SimAM(nn.Module):
         attn = self.sigmoid(score)
 
         return x * attn
+
 
 # if __name__ == '__main__':
 #     x = torch.randn(10, 512, 512, 512)
